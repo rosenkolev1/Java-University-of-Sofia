@@ -14,17 +14,17 @@ public class Main {
         TeamMember[] membersTeam1 = new TeamMember[]{
                 new TeamMember("Vasil", LocalDateTime.of(2002, Month.JULY, 17, 12, 0)),
                 new TeamMember("Ralitsa", LocalDateTime.of(2002, Month.JANUARY, 21, 12, 0)),
-                new TeamMember("Yoana", LocalDateTime.of(2002, Month.SEPTEMBER, 7, 12, 0)),
+                new TeamMember("Yoana", LocalDateTime.of(2002, Month.SEPTEMBER, 10, 12, 0)),
         };
 
         TeamMember[] membersTeam2 = new TeamMember[]{
                 new TeamMember("Roskata", LocalDateTime.of(2002, Month.SEPTEMBER, 17, 12, 0)),
                 new TeamMember("Georgi", LocalDateTime.of(2002, Month.JULY, 6, 12, 0)),
-                new TeamMember("Miro", LocalDateTime.of(2002, Month.DECEMBER, 28, 12, 0)),
+                new TeamMember("Miro", LocalDateTime.of(2002, Month.DECEMBER, 27, 12, 0)),
         };
 
         TeamMember[] membersTeam3 = new TeamMember[]{
-                new TeamMember("Pesho", LocalDateTime.of(2001, Month.JUNE, 7, 12, 0)),
+                new TeamMember("Pesho", LocalDateTime.of(2001, Month.JUNE, 11, 12, 0)),
                 new TeamMember("Lubo", LocalDateTime.of(2001, Month.JULY, 9, 12, 0)),
                 new TeamMember("Beti", LocalDateTime.of(2001, Month.JANUARY, 22, 12, 0)),
                 new TeamMember("Acho", LocalDateTime.of(2001, Month.OCTOBER, 9, 12, 0)),

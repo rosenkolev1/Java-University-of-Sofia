@@ -16,12 +16,12 @@ public abstract class BaseBookable implements Bookable{
     protected double pricePerNight;
 
     protected BaseBookable(Location location, double pricePerNight){
-        this.location = new Location(location);
+        this.location = location; //new Location(location);
         this.pricePerNight = pricePerNight;
     }
 
     protected BaseBookable(BaseBookable other){
-        this.location = new Location(other.getLocation());
+        this.location = other.getLocation();//new Location(other.getLocation());
         this.pricePerNight = other.getPricePerNight();
         this.id = other.getId();
         this.booked = other.isBooked();
@@ -46,7 +46,10 @@ public abstract class BaseBookable implements Bookable{
 
     @Override
     public boolean book(LocalDateTime checkIn, LocalDateTime checkOut) {
-        if(this.isBooked() || checkIn.isBefore(LocalDateTime.now()) || checkIn.isAfter(checkOut) )
+        if(this == null) return false;
+
+        if(this.isBooked() || checkIn == null || checkOut == null
+                || checkIn.isBefore(LocalDateTime.now()) || !checkIn.isBefore(checkOut) )
             return false;
 
         this.booked = true;
@@ -58,7 +61,8 @@ public abstract class BaseBookable implements Bookable{
 
     @Override
     public double getTotalPriceOfStay() {
-        return this.isBooked() ? (ChronoUnit.DAYS.between(this.checkIn.toLocalDate(), this.checkOut.toLocalDate()) * this.getPricePerNight()) : 0;
+        if(this == null) return 0;
+        return this.isBooked() ? (Duration.between(this.checkIn, this.checkOut).toDays() * this.getPricePerNight()) : 0;
     }
 
     @Override

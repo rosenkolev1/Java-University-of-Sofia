@@ -8,8 +8,9 @@ public class Apartment extends BaseBookable{
 
     public Apartment(Location location, double pricePerNight){
         super(location, pricePerNight);
-        Apartment.instancesCount++;
+
         this.id = "APA-" + Apartment.instancesCount;
+        Apartment.instancesCount++;
     }
 
 
@@ -18,7 +19,7 @@ public class Apartment extends BaseBookable{
     }
 
     @Override
-    public Apartment clone(){
+    public Bookable copySelf(){
         return new Apartment(this);
     }
 }

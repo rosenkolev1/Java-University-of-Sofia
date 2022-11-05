@@ -5,16 +5,19 @@ import bg.sofia.uni.fmi.mjt.airbnb.accommodation.location.Location;
 
 public class LocationCriterion implements Criterion{
 
-    private Location locationComparator;
+    private Location currentLocation;
+    private double maxDistance;
 
-    public LocationCriterion(Location location){
-        this.locationComparator = new Location(location);
+    public LocationCriterion(Location location, double maxDistance){
+        this.currentLocation = location;
+        this.maxDistance = maxDistance;
     }
 
     @Override
     public boolean check(Bookable bookable) {
         if(bookable == null) return false;
 
-        return bookable.getLocation().equalLocations(this.locationComparator);
+        Location bookableLoc = bookable.getLocation();
+        return bookableLoc.calculateDistance(this.currentLocation) <= this.maxDistance;
     }
 }

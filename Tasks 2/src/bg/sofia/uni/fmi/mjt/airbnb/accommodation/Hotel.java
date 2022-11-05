@@ -7,8 +7,8 @@ public class Hotel extends BaseBookable{
 
     public Hotel(Location location, double pricePerNight){
         super(location, pricePerNight);
-        Hotel.instancesCount++;
         this.id = "HOT-" + Hotel.instancesCount;
+        Hotel.instancesCount++;
     }
 
     public Hotel(Hotel other){
@@ -16,7 +16,7 @@ public class Hotel extends BaseBookable{
     }
 
     @Override
-    public Hotel clone(){
+    public Bookable copySelf(){
         return new Hotel(this);
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c3a714df-5332-4bba-affe-50396bd10192" name="Changes" comment="">
+    <list default="true" id="54a7a620-b22a-4183-b2f0-6753ff0166d6" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/../Tasks 2/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Tasks 2/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 2/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/Airbnb.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/Airbnb.java" afterDir="false" />
@@ -12,10 +12,13 @@
       <change beforePath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/accommodation/location/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/accommodation/location/Location.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/filter/LocationCriterion.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/filter/LocationCriterion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/filter/PriceCriterion.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/filter/PriceCriterion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Task 3 - Escape Room Bonanza/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Task 3 - Escape Room Bonanza/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Task 3 - Escape Room Bonanza/src/bg/sofia/uni/fmi/mjt/escaperoom/team/TeamMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/Task 3 - Escape Room Bonanza/src/bg/sofia/uni/fmi/mjt/escaperoom/team/TeamMember.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tasks 3/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 3/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tasks 3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 3/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tasks 3/Task 3 - Escape Room Bonanza/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 3/Task 3 - Escape Room Bonanza/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tasks 3/Task 3 - Escape Room Bonanza/src/bg/sofia/uni/fmi/mjt/escaperoom/exception/RoomAlreadyExistsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 3/Task 3 - Escape Room Bonanza/src/bg/sofia/uni/fmi/mjt/escaperoom/exception/RoomAlreadyExistsException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tasks 3/Task 3 - Escape Room Bonanza/src/bg/sofia/uni/fmi/mjt/escaperoom/exception/RoomNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 3/Task 3 - Escape Room Bonanza/src/bg/sofia/uni/fmi/mjt/escaperoom/exception/RoomNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tasks 3/Task 3 - Escape Room Bonanza/src/bg/sofia/uni/fmi/mjt/escaperoom/exception/TeamNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 3/Task 3 - Escape Room Bonanza/src/bg/sofia/uni/fmi/mjt/escaperoom/exception/TeamNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tasks 3/Task 3 - Escape Room Bonanza/src/bg/sofia/uni/fmi/mjt/escaperoom/team/TeamMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 3/Task 3 - Escape Room Bonanza/src/bg/sofia/uni/fmi/mjt/escaperoom/team/TeamMember.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,10 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectId" id="2GxFQTadeJrtZHCcSxd2SDIbsl1" />
+  <component name="ProjectId" id="2H7ZZkNBpONN7XvQrz88AMyEWao" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -38,25 +38,18 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Материали от унито/Трети семестър/Java-University-of-Sofia/Tasks 3/Task 3 - Escape Room Bonanza",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.file-colors"
+    "WebServerToolWindowFactoryState": "false"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c3a714df-5332-4bba-affe-50396bd10192" name="Changes" comment="" />
-      <created>1667322313881</created>
+      <changelist id="54a7a620-b22a-4183-b2f0-6753ff0166d6" name="Changes" comment="" />
+      <created>1667638146768</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1667322313881</updated>
-      <workItem from="1667322315067" duration="78000" />
-      <workItem from="1667419173869" duration="17000" />
-      <workItem from="1667419229817" duration="456000" />
+      <updated>1667638146768</updated>
+      <workItem from="1667638148294" duration="13000" />
     </task>
     <servers />
   </component>

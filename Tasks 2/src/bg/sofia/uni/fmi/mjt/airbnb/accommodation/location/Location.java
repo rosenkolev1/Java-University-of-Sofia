@@ -18,4 +18,10 @@ public class Location {
     public boolean equalLocations(Location other){
         return this.x == other.x && this.y == other.y;
     }
+
+    public double calculateDistance(Location other){
+        double xOffset = this.x - other.x;
+        double yOffset = this.y - other.y;
+        return Math.sqrt(xOffset * xOffset + yOffset * yOffset);
+    }
 }

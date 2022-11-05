@@ -1,4 +1,7 @@
 import bg.sofia.uni.fmi.mjt.escaperoom.EscapeRoomPlatform;
+import bg.sofia.uni.fmi.mjt.escaperoom.exception.RoomAlreadyExistsException;
+import bg.sofia.uni.fmi.mjt.escaperoom.exception.RoomNotFoundException;
+import bg.sofia.uni.fmi.mjt.escaperoom.exception.TeamNotFoundException;
 import bg.sofia.uni.fmi.mjt.escaperoom.room.Difficulty;
 import bg.sofia.uni.fmi.mjt.escaperoom.room.EscapeRoom;
 import bg.sofia.uni.fmi.mjt.escaperoom.room.Review;
@@ -10,10 +13,13 @@ import java.time.LocalDateTime;
 import java.time.Month;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws
+            RoomAlreadyExistsException,
+            RoomNotFoundException,
+            TeamNotFoundException {
         TeamMember[] membersTeam1 = new TeamMember[]{
                 new TeamMember("Vasil", LocalDateTime.of(2002, Month.JULY, 17, 12, 0)),
-                new TeamMember("Ralitsa", LocalDateTime.of(2002, Month.JANUARY, 21, 12, 0)),
+                new TeamMember("Ralitsa", LocalDateTime.of(2002, Month.FEBRUARY, 21, 12, 0)),
                 new TeamMember("Yoana", LocalDateTime.of(2002, Month.SEPTEMBER, 10, 12, 0)),
         };
 

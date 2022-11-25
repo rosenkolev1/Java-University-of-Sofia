@@ -2,23 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54a7a620-b22a-4183-b2f0-6753ff0166d6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Tasks 2/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tasks 2/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 2/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/Airbnb.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/Airbnb.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/accommodation/Apartment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/accommodation/Apartment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/accommodation/BaseBookable.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/accommodation/BaseBookable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/accommodation/Hotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/accommodation/Hotel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/accommodation/Villa.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/accommodation/Villa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/accommodation/location/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/accommodation/location/Location.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/filter/LocationCriterion.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/filter/LocationCriterion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/filter/PriceCriterion.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 2/src/bg/sofia/uni/fmi/mjt/airbnb/filter/PriceCriterion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tasks 3/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 3/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tasks 3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 3/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tasks 3/Task 3 - Escape Room Bonanza/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 3/Task 3 - Escape Room Bonanza/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tasks 3/Task 3 - Escape Room Bonanza/src/bg/sofia/uni/fmi/mjt/escaperoom/exception/RoomAlreadyExistsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 3/Task 3 - Escape Room Bonanza/src/bg/sofia/uni/fmi/mjt/escaperoom/exception/RoomAlreadyExistsException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tasks 3/Task 3 - Escape Room Bonanza/src/bg/sofia/uni/fmi/mjt/escaperoom/exception/RoomNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 3/Task 3 - Escape Room Bonanza/src/bg/sofia/uni/fmi/mjt/escaperoom/exception/RoomNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tasks 3/Task 3 - Escape Room Bonanza/src/bg/sofia/uni/fmi/mjt/escaperoom/exception/TeamNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 3/Task 3 - Escape Room Bonanza/src/bg/sofia/uni/fmi/mjt/escaperoom/exception/TeamNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tasks 3/Task 3 - Escape Room Bonanza/src/bg/sofia/uni/fmi/mjt/escaperoom/team/TeamMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Tasks 3/Task 3 - Escape Room Bonanza/src/bg/sofia/uni/fmi/mjt/escaperoom/team/TeamMember.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab 5/Smart Fridge/src/bg/sofia/uni/fmi/mjt/smartfridge/SmartFridge.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab 5/Smart Fridge/src/bg/sofia/uni/fmi/mjt/smartfridge/SmartFridge.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +12,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2H7ZZkNBpONN7XvQrz88AMyEWao" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -38,7 +26,8 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false"
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Материали от унито/Трети семестър/Java-University-of-Sofia/Lab 6"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -50,6 +39,8 @@
       <option name="presentableId" value="Default" />
       <updated>1667638146768</updated>
       <workItem from="1667638148294" duration="13000" />
+      <workItem from="1668611350266" duration="378000" />
+      <workItem from="1668843208853" duration="536000" />
     </task>
     <servers />
   </component>

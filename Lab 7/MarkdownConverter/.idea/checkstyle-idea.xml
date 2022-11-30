@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CheckStyle-IDEA" serialisationVersion="2">
-    <checkstyleVersion>10.3.4</checkstyleVersion>
+    <checkstyleVersion>10.4</checkstyleVersion>
     <scanScope>JavaOnly</scanScope>
     <copyLibs>true</copyLibs>
     <option name="thirdPartyClasspath" />
     <option name="activeLocationIds">
-      <option value="2660fe7a-8bff-47f9-bdd9-a58163232010" />
+      <option value="f7619bd4-ed3d-4677-912c-0bbbad75e6c3" />
     </option>
     <option name="locations">
       <list>
         <ConfigurationLocation id="bundled-sun-checks" type="BUNDLED" scope="All" description="Sun Checks">(bundled)</ConfigurationLocation>
         <ConfigurationLocation id="bundled-google-checks" type="BUNDLED" scope="All" description="Google Checks">(bundled)</ConfigurationLocation>
-        <ConfigurationLocation id="2660fe7a-8bff-47f9-bdd9-a58163232010" type="HTTP_URL" scope="All" description="Java Course Checkstyle">https://raw.githubusercontent.com/fmi/java-course/master/docs/02-code-analysis-tools/checkstyle/checkstyle.xml</ConfigurationLocation>
+        <ConfigurationLocation id="f7619bd4-ed3d-4677-912c-0bbbad75e6c3" type="HTTP_URL" scope="All" description="Java Course Checkstyle">https://raw.githubusercontent.com/fmi/java-course/master/docs/02-code-analysis-tools/checkstyle/checkstyle.xml</ConfigurationLocation>
       </list>
     </option>
   </component>

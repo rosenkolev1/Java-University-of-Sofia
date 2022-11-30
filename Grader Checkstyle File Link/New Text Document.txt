@@ -1,0 +1,1 @@
+https://raw.githubusercontent.com/fmi/java-course/master/docs/02-code-analysis-tools/checkstyle/checkstyle.xml

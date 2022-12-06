@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a440283b-3a41-4a17-b512-268ca7c4f5af" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/checkstyleidea-libs/readme.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Homework 1/accounts.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/accounts.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/Mail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/Mail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/Outlook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/Outlook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/AccountAlreadyExistsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/AccountAlreadyExistsException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/AccountNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/AccountNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/FolderAlreadyExistsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/FolderAlreadyExistsException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/FolderNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/FolderNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/InvalidPathException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/InvalidPathException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/RuleAlreadyDefinedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/RuleAlreadyDefinedException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/bg/sofia/uni/fmi/mjt/mail/OutlookTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/bg/sofia/uni/fmi/mjt/mail/OutlookTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="a440283b-3a41-4a17-b512-268ca7c4f5af" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -199,6 +183,7 @@
       <workItem from="1670171241773" duration="13060000" />
       <workItem from="1670234925945" duration="26280000" />
       <workItem from="1670325353260" duration="3287000" />
+      <workItem from="1670328771816" duration="73000" />
     </task>
     <servers />
   </component>

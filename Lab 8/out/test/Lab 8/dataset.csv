@@ -1,0 +1,11 @@
+id,title,type,description,release_year,runtime,genres,seasons,imdb_id,imdb_score,imdb_votes
+tm1,Taxi Driver,MOVIE,Some description lol,1976,114,['drama'; 'crime'],-1,tt1,8.2,808582.0
+tm2,Deliverance,MOVIE,Some description lol,1972,109,['drama'; 'action'; 'thriller'; 'european'],-1,tt2,7.7,107673.0
+tm3,Monty Python and the Holy Grail,MOVIE,Some description lol,1975,91,['fantasy'; 'action'; 'comedy'],-1,tt3,8.2,534486.0
+tm4,The Dirty Dozen,MOVIE,Some description lol,1967,150,['war'; 'action'],-1,tt4,7.7,72662.0
+tm5,Monty Python's Flying Circus,SHOW,Some description lol,1969,30,['comedy'; 'european'],1,tt5,8.8,73424.0
+tm6,Life of Brian,MOVIE,Some description lol,1979,94,['comedy'],-1,tt6,8.0,395024.0
+tm7,Dirty Harry,SHOW,Some description lol,1971,170,['thriller'; 'action'; 'crime'],3,tt7,7.7,155051.0
+tm8,Bonnie and Clyde,MOVIE,Some description lol,1967,110,['crime'; 'drama'; 'action'],-1,tt8,7.7,112048.0
+tm9,The Blue Lagoon,MOVIE,Some description lol,1980,104,['romance'; 'action'; 'drama'],-1,tt9,5.8,69844.0
+tm10,The Guns of Navarone,MOVIE,Some description lol,1961,158,['action'; 'drama'; 'war'],-1,tt10,7.5,50748.0

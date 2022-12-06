@@ -6,8 +6,7 @@ public class InvalidPathException extends RuntimeException{
         super(errorMessage);
     }
 
-    //Commenting for code coverage :)
-//    public InvalidPathException(String errorMessage, Throwable e) {
-//        super(errorMessage, e);
-//    }
+    public InvalidPathException(String errorMessage, Throwable e) {
+        super(errorMessage, e);
+    }
 }

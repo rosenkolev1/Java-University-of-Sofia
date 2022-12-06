@@ -6,8 +6,7 @@ public class FolderNotFoundException extends RuntimeException{
         super(errorMessage);
     }
 
-    //Commenting for code coverage :)
-//    public FolderNotFoundException(String errorMessage, Throwable e) {
-//        super(errorMessage, e);
-//    }
+    public FolderNotFoundException(String errorMessage, Throwable e) {
+        super(errorMessage, e);
+    }
 }

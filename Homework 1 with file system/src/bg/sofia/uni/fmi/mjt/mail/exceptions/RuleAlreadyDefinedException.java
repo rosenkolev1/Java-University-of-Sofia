@@ -6,8 +6,7 @@ public class RuleAlreadyDefinedException extends RuntimeException{
         super(errorMessage);
     }
 
-    //Commenting for code coverage :)
-//    public RuleAlreadyDefinedException(String errorMessage, Throwable e) {
-//        super(errorMessage, e);
-//    }
+    public RuleAlreadyDefinedException(String errorMessage, Throwable e) {
+        super(errorMessage, e);
+    }
 }

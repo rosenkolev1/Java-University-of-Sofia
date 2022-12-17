@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a440283b-3a41-4a17-b512-268ca7c4f5af" name="Changes" comment="" />
+    <list default="true" id="a440283b-3a41-4a17-b512-268ca7c4f5af" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/AccountRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/AccountRule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/Mail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/Mail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/MailClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/MailClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/Outlook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/Outlook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/StoredMail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/StoredMail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/AccountAlreadyExistsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/AccountAlreadyExistsException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/AccountNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/AccountNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/FolderAlreadyExistsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/FolderAlreadyExistsException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/FolderNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/FolderNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/InvalidPathException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/InvalidPathException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/RuleAlreadyDefinedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bg/sofia/uni/fmi/mjt/mail/exceptions/RuleAlreadyDefinedException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/bg/sofia/uni/fmi/mjt/mail/MailTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/bg/sofia/uni/fmi/mjt/mail/MailTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/bg/sofia/uni/fmi/mjt/mail/OutlookTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/bg/sofia/uni/fmi/mjt/mail/OutlookTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,10 +60,11 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_directory_selection&quot;: &quot;D:/Материали от унито/Трети семестър/Java-University-of-Sofia/Homework 1/test&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Материали от унито/Трети семестър/Java-University-of-Sofia/Homework 1/test&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Материали от унито/Трети семестър/Java-University-of-Sofia/Homework 1&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.Java&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -60,6 +78,22 @@
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Homework 1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MailTest.testGetSender" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Homework 1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="bg.sofia.uni.fmi.mjt.mail.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="bg.sofia.uni.fmi.mjt.mail" />
+      <option name="MAIN_CLASS_NAME" value="bg.sofia.uni.fmi.mjt.mail.MailTest" />
+      <option name="METHOD_NAME" value="testGetSender" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -111,7 +145,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OutlookTest.testSendMailManyRulesWithMultipleMatchingSameMail_EmailsWorks" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="OutlookTest.testReceiveEmailWorksCorrectlyWhenCalledOnItsOwn" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Homework 1" />
       <extension name="coverage">
         <pattern>
@@ -121,23 +155,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="bg.sofia.uni.fmi.mjt.mail" />
       <option name="MAIN_CLASS_NAME" value="bg.sofia.uni.fmi.mjt.mail.OutlookTest" />
-      <option name="METHOD_NAME" value="testSendMailManyRulesWithMultipleMatchingSameMail_EmailsWorks" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OutlookTest.testSendMailSingleRule_TwoMailsWorks" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Homework 1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="bg.sofia.uni.fmi.mjt.mail.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="bg.sofia.uni.fmi.mjt.mail" />
-      <option name="MAIN_CLASS_NAME" value="bg.sofia.uni.fmi.mjt.mail.OutlookTest" />
-      <option name="METHOD_NAME" value="testSendMailSingleRule_TwoMailsWorks" />
+      <option name="METHOD_NAME" value="testReceiveEmailWorksCorrectlyWhenCalledOnItsOwn" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -156,19 +174,19 @@
     <list>
       <item itemvalue="Application.Main" />
       <item itemvalue="JUnit.test" />
+      <item itemvalue="JUnit.MailTest.testGetSender" />
+      <item itemvalue="JUnit.OutlookTest.testReceiveEmailWorksCorrectlyWhenCalledOnItsOwn" />
       <item itemvalue="JUnit.OutlookTest" />
       <item itemvalue="JUnit.OutlookTest.testAddingRuleThatMatchesExistingEmailChangesEmailPosition_EmailsWorks" />
       <item itemvalue="JUnit.OutlookTest.testGetMailsFromFolderWorks" />
-      <item itemvalue="JUnit.OutlookTest.testSendMailManyRulesWithMultipleMatchingSameMail_EmailsWorks" />
-      <item itemvalue="JUnit.OutlookTest.testSendMailSingleRule_TwoMailsWorks" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.OutlookTest.testReceiveEmailWorksCorrectlyWhenCalledOnItsOwn" />
+        <item itemvalue="JUnit.MailTest.testGetSender" />
         <item itemvalue="JUnit.OutlookTest.testGetMailsFromFolderWorks" />
         <item itemvalue="JUnit.OutlookTest.testAddingRuleThatMatchesExistingEmailChangesEmailPosition_EmailsWorks" />
         <item itemvalue="JUnit.OutlookTest" />
-        <item itemvalue="JUnit.OutlookTest.testSendMailManyRulesWithMultipleMatchingSameMail_EmailsWorks" />
-        <item itemvalue="JUnit.OutlookTest.testSendMailSingleRule_TwoMailsWorks" />
       </list>
     </recent_temporary>
   </component>
@@ -184,6 +202,8 @@
       <workItem from="1670234925945" duration="26280000" />
       <workItem from="1670325353260" duration="3287000" />
       <workItem from="1670328771816" duration="73000" />
+      <workItem from="1670773112469" duration="1963000" />
+      <workItem from="1671103207266" duration="103000" />
     </task>
     <servers />
   </component>
@@ -213,8 +233,8 @@
     <SUITE FILE_PATH="coverage/Homework_1$AccountRuleTest.ic" NAME="AccountRuleTest Coverage Results" MODIFIED="1670246530856" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>bg.sofia.uni.fmi.mjt.mail.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/Homework_1$Main.ic" NAME="Main Coverage Results" MODIFIED="1670252003858" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Homework_1$test.ic" NAME="test Coverage Results" MODIFIED="1670328568988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Homework_1$Main.ic" NAME="Main Coverage Results" MODIFIED="1670774513963" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Homework_1$test.ic" NAME="test Coverage Results" MODIFIED="1670774521549" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Homework_1$OutlookTest.ic" NAME="OutlookTest Coverage Results" MODIFIED="1670254077310" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>bg.sofia.uni.fmi.mjt.mail.*</FILTER>
     </SUITE>

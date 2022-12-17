@@ -16,6 +16,9 @@ public class AccountRule {
         FROM
     );
 
+    public static final int MIN_PRIORITY = 1;
+    public static final int MAX_PRIORITY = 10;
+
     private String accountName;
     private String folderPath;
     private String ruleDefinition;
@@ -39,21 +42,18 @@ public class AccountRule {
 
         List<String> ruleConditions = List.of(ruleDefinition.split(System.getProperty("line.separator")));
 
-        for(String ruleCondition : ruleConditions) {
+        for (String ruleCondition : ruleConditions) {
 
-            if(ruleCondition.startsWith(SUBJECT_INCLUDES)) {
+            if (ruleCondition.startsWith(SUBJECT_INCLUDES)) {
                 this.subjectIncludesKeywords = List.of(ruleCondition.replaceFirst(SUBJECT_INCLUDES, "")
                     .split(KEYWORDS_SEPARATOR));
-            }
-            else if(ruleCondition.startsWith(SUBJECT_OR_BODY_INCLUDE)) {
+            } else if (ruleCondition.startsWith(SUBJECT_OR_BODY_INCLUDE)) {
                 this.subjectOrBodyIncludeKeywords = List.of(ruleCondition.replaceFirst(SUBJECT_OR_BODY_INCLUDE, "")
                     .split(KEYWORDS_SEPARATOR));
-            }
-            else if(ruleCondition.startsWith(RECIPIENTS_INCLUDE)) {
+            } else if (ruleCondition.startsWith(RECIPIENTS_INCLUDE)) {
                 this.recipientsIncludeEmails = List.of(ruleCondition.replaceFirst(RECIPIENTS_INCLUDE, "")
                     .split(KEYWORDS_SEPARATOR));
-            }
-            else if(ruleCondition.startsWith(FROM)) {
+            } else if (ruleCondition.startsWith(FROM)) {
                 this.fromEmail = ruleCondition.replaceFirst(FROM, "");
             }
 
@@ -65,19 +65,19 @@ public class AccountRule {
 
         Map<String, Integer> ruleConditionDefinedCount = new HashMap<>();
 
-        for(String ruleConditionKey : RULE_CONDITIONS_KEYS) {
+        for (String ruleConditionKey : RULE_CONDITIONS_KEYS) {
             ruleConditionDefinedCount.put(ruleConditionKey, 0);
         }
 
-        for(String ruleCondition : ruleConditions) {
-            for(String ruleConditionKey : RULE_CONDITIONS_KEYS) {
-                if(ruleCondition.startsWith(ruleConditionKey)) {
+        for (String ruleCondition : ruleConditions) {
+            for (String ruleConditionKey : RULE_CONDITIONS_KEYS) {
+                if (ruleCondition.startsWith(ruleConditionKey)) {
                     ruleConditionDefinedCount.put(
                         ruleConditionKey,
                         ruleConditionDefinedCount.get(ruleConditionKey) + 1
                     );
 
-                    if(ruleConditionDefinedCount.get(ruleConditionKey) >= 2) {
+                    if (ruleConditionDefinedCount.get(ruleConditionKey) >= 2) {
                         return false;
                     }
                 }
@@ -90,15 +90,15 @@ public class AccountRule {
     public boolean matchesMail(Mail mail) {
 
         //Check if the subject includes necessary keywords
-        for(String keyword : this.subjectIncludesKeywords) {
-            if(!mail.subject().contains(keyword)) {
+        for (String keyword : this.subjectIncludesKeywords) {
+            if (!mail.subject().contains(keyword)) {
                 return false;
             }
         }
 
         //Check if the subject or body includes necessary keywords
-        for(String keyword : this.subjectOrBodyIncludeKeywords) {
-            if(!mail.subject().contains(keyword) && !mail.body().contains(keyword)) {
+        for (String keyword : this.subjectOrBodyIncludeKeywords) {
+            if (!mail.subject().contains(keyword) && !mail.body().contains(keyword)) {
                 return false;
             }
         }
@@ -106,14 +106,14 @@ public class AccountRule {
         //Check if at least one necessary recipient is included in the email
         boolean matchesRecipient = this.recipientsIncludeEmails.isEmpty();
 
-        for(String recipientEmail : this.recipientsIncludeEmails) {
-            if(mail.recipients().contains(recipientEmail)) {
+        for (String recipientEmail : this.recipientsIncludeEmails) {
+            if (mail.recipients().contains(recipientEmail)) {
                 matchesRecipient = true;
                 break;
             }
         }
 
-        if(!matchesRecipient) return false;
+        if (!matchesRecipient) return false;
 
         //Check if the sender matches
         return this.fromEmail == null || this.fromEmail.equals(mail.sender().emailAddress());

@@ -12,36 +12,47 @@ public record Mail(Account sender, Set<String> recipients, String subject, Strin
     public static final String RECIPIENTS = "recipients: ";
     public static final String RECEIVED = "received: ";
 
-    private static final String newLine = System.lineSeparator();
+    private static final String NEWLINE = System.lineSeparator();
 
     public static Mail createMail(Account sender, String metadata, String content) {
 
-        List<String> metadataFields = List.of(metadata.split(newLine));
+        List<String> metadataFields = List.of(metadata.split(NEWLINE));
 
         String subject = null;
         Set<String> recipients = null;
         LocalDateTime received = null;
 
-        for(String field : metadataFields) {
+        for (String field : metadataFields) {
 
-            if(field.startsWith(Mail.SUBJECT)) {
+            if (field.startsWith(Mail.SUBJECT)) {
                 subject = field.replaceFirst(Mail.SUBJECT, "");
-            }
-            else if(field.startsWith(Mail.RECEIVED)) {
+            } else if (field.startsWith(Mail.RECEIVED)) {
                 String receivedString = field.replaceFirst(Mail.RECEIVED, "");
                 //yyyy-MM-dd HH:mm
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                 received = LocalDateTime.parse(receivedString, formatter);
-            }
-            else if(field.startsWith(Mail.RECIPIENTS)) {
+            } else if (field.startsWith(Mail.RECIPIENTS)) {
                 recipients = Set.of(field.replaceFirst(Mail.RECIPIENTS, "").split(", "));
             }
 
-            if(subject != null && recipients != null && received != null) {
+            if (subject != null && recipients != null && received != null) {
                 break;
             }
         }
 
         return new Mail(sender, recipients, subject, content, received);
+    }
+
+    public static String getSender(String metadata) {
+        List<String> metadataFields = List.of(metadata.split(NEWLINE));
+
+        for (String field : metadataFields) {
+
+            if (field.startsWith(Mail.SENDER)) {
+                return field.replaceFirst(Mail.SENDER, "");
+            }
+        }
+
+        return null;
     }
 }

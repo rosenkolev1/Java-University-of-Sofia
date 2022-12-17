@@ -12,7 +12,7 @@ public class OutlookTest {
 
     private final String newLine = System.lineSeparator();
 
-    private void testCollectionIsUnmodifiable(Collection<?> collection){
+    private void testCollectionIsUnmodifiable(Collection<?> collection) {
         Assertions.assertThrows(UnsupportedOperationException.class,
             () -> collection.remove(0),
             "The collection should be unmodifiable");
@@ -23,7 +23,7 @@ public class OutlookTest {
     }
 
     @Test
-    void testAddNewAccountWorks(){
+    void testAddNewAccountWorks() {
 
         String newAccName = "Roskata123";
         String newAccEmail = "roskata123@abv.bg";
@@ -66,7 +66,7 @@ public class OutlookTest {
     }
 
     @Test
-    void testAddNewAccountAlreadyExists(){
+    void testAddNewAccountAlreadyExists() {
         client.addNewAccount("Roskata123", "roskata123@abv.bg");
 
         String newAccName = "Roskata123";
@@ -82,11 +82,11 @@ public class OutlookTest {
 
         Assertions.assertThrows(AccountAlreadyExistsException.class,
             () -> client.addNewAccount("Roskata123", "roskata123@abv.bg"),
-        "Expected AccountAlreadyExistsException but nothing was thrown!");
+            "Expected AccountAlreadyExistsException but nothing was thrown!");
     }
 
     @Test
-    void testAddNewAccountNullOrEmptyOrBlankName(){
+    void testAddNewAccountNullOrEmptyOrBlankName() {
         Assertions.assertThrows(IllegalArgumentException.class,
             () -> client.addNewAccount(null, "roskata123@abv.bg"),
             "Expected IllegalArgumentException because of null name but nothing was thrown!");
@@ -101,7 +101,7 @@ public class OutlookTest {
     }
 
     @Test
-    void testAddNewAccountNullOrEmptyOrBlankEmail(){
+    void testAddNewAccountNullOrEmptyOrBlankEmail() {
         Assertions.assertThrows(IllegalArgumentException.class,
             () -> client.addNewAccount("Roskata123", null),
             "Expected IllegalArgumentException because of null email but nothing was thrown!");
@@ -116,7 +116,7 @@ public class OutlookTest {
     }
 
     @Test
-    void testCreateFolderThrowsIllegalArgumentExceptionBecauseAccountNameIsNullOrBlank(){
+    void testCreateFolderThrowsIllegalArgumentExceptionBecauseAccountNameIsNullOrBlank() {
 
         Assertions.assertThrows(IllegalArgumentException.class,
             () -> this.client.createFolder(null, getInboxPath("/Important")),
@@ -132,7 +132,7 @@ public class OutlookTest {
     }
 
     @Test
-    void testCreateFolderThrowsIllegalArgumentExceptionBecausePathIsNullOrBlank(){
+    void testCreateFolderThrowsIllegalArgumentExceptionBecausePathIsNullOrBlank() {
 
         Assertions.assertThrows(IllegalArgumentException.class,
             () -> this.client.createFolder("Roskata123", null),
@@ -237,7 +237,7 @@ public class OutlookTest {
             new AccountFolder("Roskata123", getInboxPath("/Important/PDF/Diploma"))
         );
 
-        var inboxFolders =  client.getInboxFoldersForAcc("Roskata123");
+        var inboxFolders = client.getInboxFoldersForAcc("Roskata123");
         Assertions.assertIterableEquals(expectedAccFolders, inboxFolders);
 
         Assertions.assertThrows(UnsupportedOperationException.class,
@@ -420,7 +420,7 @@ public class OutlookTest {
     }
 
     @Test
-    void testSendMailThrowsIllegalArgumentExceptionBecauseAccountNameIsNullOrBlank(){
+    void testSendMailThrowsIllegalArgumentExceptionBecauseAccountNameIsNullOrBlank() {
         Assertions.assertThrows(IllegalArgumentException.class,
             () -> client.sendMail(null, "ss", "ss"),
             "Expected IllegalArgumentException because of null account name, but nothing was thrown");
@@ -435,7 +435,7 @@ public class OutlookTest {
     }
 
     @Test
-    void testSendMailThrowsIllegalArgumentExceptionBecauseMetadataIsNullOrBlank(){
+    void testSendMailThrowsIllegalArgumentExceptionBecauseMetadataIsNullOrBlank() {
         Assertions.assertThrows(IllegalArgumentException.class,
             () -> client.sendMail("ss", null, "ss"),
             "Expected IllegalArgumentException because of null metadata, but nothing was thrown");
@@ -450,7 +450,7 @@ public class OutlookTest {
     }
 
     @Test
-    void testSendMailThrowsIllegalArgumentExceptionBecauseMailContentIsNullOrBlank(){
+    void testSendMailThrowsIllegalArgumentExceptionBecauseMailContentIsNullOrBlank() {
         Assertions.assertThrows(IllegalArgumentException.class,
             () -> client.sendMail("ss", "ss", null),
             "Expected IllegalArgumentException because of null mail content, but nothing was thrown");
@@ -465,7 +465,7 @@ public class OutlookTest {
     }
 
     @Test
-    void testSendMailNoRules_SingleMailWorks(){
+    void testSendMailNoRules_SingleMailWorks() {
         client.addNewAccount("Stefan", "stefan@abv.bg");
         client.addNewAccount("Roskata123", "rosen123@abv.bg");
         client.addNewAccount("vajenRecipient", "vr@abv.bg");
@@ -1450,5 +1450,62 @@ public class OutlookTest {
             () -> client.receiveMail("Stefan", "metadata", "content"),
             "Expected AccountNotFoundException, but nothing was thrown!"
         );
+    }
+
+    @Test
+    void testReceiveEmailWorksCorrectlyWhenCalledOnItsOwn() {
+        client.addNewAccount("Stefan", "stefan@abv.bg");
+        client.addNewAccount("Roskata123", "rosen123@abv.bg");
+        client.addNewAccount("vajenRecipient", "vr@abv.bg");
+        client.addNewAccount("malovajenRecipient", "mvr@abv.bg");
+
+        client.createFolder("Roskata123", getInboxPath("/Important"));
+        client.createFolder("Roskata123", getInboxPath("/Important/SUPER_IMPORTANT"));
+        client.createFolder("Roskata123", getInboxPath("/Spam"));
+        client.createFolder("vajenRecipient", getInboxPath("/Spam"));
+
+        String ruleDefinition1 = "subject-includes: voda" + newLine +
+            "subject-or-body-includes: voda vajno" + newLine +
+            "recipients-includes: vr@abv.bg" + newLine +
+            "from: stefan@abv.bg";
+
+        String ruleDefinition2 = "subject-includes: ni6to";
+
+        String ruleDefinition3 = "subject-includes: voda, ne6to" + newLine +
+            "subject-or-body-includes: voda vajno, Absolutno" + newLine +
+            "recipients-includes: stefan@abv.bg, vr@abv.bg" + newLine +
+            "from: stefan@abv.bg";
+
+        client.addRule("Roskata123", getInboxPath("/Important"), ruleDefinition1, 3);
+        client.addRule("Roskata123", getInboxPath("/Spam"), ruleDefinition2, 4);
+        client.addRule("vajenRecipient", getInboxPath("/Spam"), ruleDefinition2, 4);
+        client.addRule("Roskata123", getInboxPath("/Important/SUPER_IMPORTANT"), ruleDefinition3, 2);
+
+        String emailMetadata1 = "sender: stefan@abv.bg" + newLine +
+            "subject: ni6to zna4itelno" + newLine +
+            "recipients: vr@abv.bg, rosen123@abv.bg" + newLine +
+            "received: 2022-12-03 12:00";
+        String emailContent1 = "Absolutno ni6to voda vajno nqma v tozi email";
+
+        client.receiveMail("Roskata123", emailMetadata1, emailContent1);
+
+        LocalDateTime expectedReceivedTime = LocalDateTime.of(2022, 12, 3, 12, 0);
+
+        Account sender = new Account("stefan@abv.bg", "Stefan");
+        Mail expectedMail = new Mail(sender,
+            Set.of(
+                "vr@abv.bg",
+                "rosen123@abv.bg"
+            ),
+            "ni6to zna4itelno",
+            emailContent1,
+            expectedReceivedTime);
+        List<StoredMail> expectedMails = List.of(
+            new StoredMail(expectedMail, new AccountFolder("Roskata123", getInboxPath("/Spam")))
+        );
+
+        Assertions.assertEquals(expectedMails,
+            client.getStoredInboxMailsForAccountAsUnmodifiable("Roskata123"),
+            "The expected mails do not match the actual mails!");
     }
 }

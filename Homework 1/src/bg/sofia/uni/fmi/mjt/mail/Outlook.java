@@ -59,8 +59,8 @@ public class Outlook implements MailClient {
     private List<String> getInboxFoldersPathsForAccount(String accountName) {
         List<String> inboxFoldersPaths = new ArrayList<>();
 
-        for(AccountFolder folder : this.accountsInboxFolders) {
-            if(folder.accountName().equals(accountName)){
+        for (AccountFolder folder : this.accountsInboxFolders) {
+            if (folder.accountName().equals(accountName)) {
                 inboxFoldersPaths.add(folder.path());
             }
         }
@@ -69,8 +69,8 @@ public class Outlook implements MailClient {
     }
 
     private Account getAccountByName(String name) {
-        for(Account acc : this.accounts) {
-            if(acc.name().equals(name)) {
+        for (Account acc : this.accounts) {
+            if (acc.name().equals(name)) {
                 return acc;
             }
         }
@@ -79,8 +79,8 @@ public class Outlook implements MailClient {
     }
 
     private Account getAccountByEmail(String email) {
-        for(Account acc : this.accounts) {
-            if(acc.emailAddress().equals(email)) {
+        for (Account acc : this.accounts) {
+            if (acc.emailAddress().equals(email)) {
                 return acc;
             }
         }
@@ -89,19 +89,19 @@ public class Outlook implements MailClient {
     }
 
     private void validateIsNotNullEmptyOrBlank(String data, String name) {
-        if(data == null || data.isBlank()){
+        if (data == null || data.isBlank()) {
             throw new IllegalArgumentException("The " + name + " is null, empty or blank!");
         }
     }
 
-    public Mail createMail(String senderEmail, String metadata, String content){
+    public Mail createMail(String senderEmail, String metadata, String content) {
         Account sender = this.getAccountByEmail(senderEmail);
 
         return Mail.createMail(sender, metadata, content);
     }
 
     private String getFolderPathForMail(Mail mail, List<AccountRule> accountRules) {
-        if(accountRules.isEmpty()) {
+        if (accountRules.isEmpty()) {
             return this.INBOX_FOLDER_PATH;
         }
 
@@ -109,11 +109,11 @@ public class Outlook implements MailClient {
 
         boolean rulesHasChangedOnce = false;
 
-        for(int i = 1; i < accountRules.size(); i++) {
+        for (int i = 1; i < accountRules.size(); i++) {
             AccountRule curRule = accountRules.get(i);
 
-            if(curRule.matchesMail(mail)) {
-                if(!highestPriorityRule.matchesMail(mail) ||
+            if (curRule.matchesMail(mail)) {
+                if (!highestPriorityRule.matchesMail(mail) ||
                     curRule.getPriority() < highestPriorityRule.getPriority()) {
 
                     highestPriorityRule = curRule;
@@ -124,10 +124,9 @@ public class Outlook implements MailClient {
 
         String folderPathForEmail = null;
 
-        if(!rulesHasChangedOnce && !highestPriorityRule.matchesMail(mail)) {
+        if (!rulesHasChangedOnce && !highestPriorityRule.matchesMail(mail)) {
             folderPathForEmail = this.INBOX_FOLDER_PATH;
-        }
-        else {
+        } else {
             folderPathForEmail = highestPriorityRule.getFolderPath();
         }
 
@@ -135,8 +134,8 @@ public class Outlook implements MailClient {
     }
 
     private AccountFolder getInboxFolder(String accountName, String folderPath) {
-        for(var folder : this.accountsInboxFolders) {
-            if(folder.accountName().equals(accountName) &&
+        for (var folder : this.accountsInboxFolders) {
+            if (folder.accountName().equals(accountName) &&
                 folder.path().equals(folderPath)) {
                 return folder;
             }
@@ -148,8 +147,8 @@ public class Outlook implements MailClient {
     private List<StoredMail> getStoredInboxMailsForAccount(String accountName) {
         List<StoredMail> filteredMails = new ArrayList<>();
 
-        for(var storedMail : this.storedInboxMails) {
-            if(storedMail.inboxInfo().accountName().equals(accountName)) {
+        for (var storedMail : this.storedInboxMails) {
+            if (storedMail.folder().accountName().equals(accountName)) {
                 filteredMails.add(storedMail);
             }
         }
@@ -161,17 +160,17 @@ public class Outlook implements MailClient {
         List<StoredMail> filteredMails = new ArrayList<>();
 
         //Check inbox mails
-        for(var storedMail : this.storedInboxMails) {
-            if(storedMail.inboxInfo().accountName().equals(accountName) &&
-                storedMail.inboxInfo().path().equals(folderPath)) {
+        for (var storedMail : this.storedInboxMails) {
+            if (storedMail.folder().accountName().equals(accountName) &&
+                storedMail.folder().path().equals(folderPath)) {
                 filteredMails.add(storedMail);
             }
         }
 
         //Check sent mails
-        for(var storedMail : this.storedSentMails) {
-            if(storedMail.inboxInfo().accountName().equals(accountName) &&
-                storedMail.inboxInfo().path().equals(folderPath)) {
+        for (var storedMail : this.storedSentMails) {
+            if (storedMail.folder().accountName().equals(accountName) &&
+                storedMail.folder().path().equals(folderPath)) {
                 filteredMails.add(storedMail);
             }
         }
@@ -186,8 +185,8 @@ public class Outlook implements MailClient {
     private List<StoredMail> getStoredSentMailsForAccount(String accountName) {
         List<StoredMail> filteredMails = new ArrayList<>();
 
-        for(var storedMail : this.storedSentMails) {
-            if(storedMail.inboxInfo().accountName().equals(accountName)) {
+        for (var storedMail : this.storedSentMails) {
+            if (storedMail.folder().accountName().equals(accountName)) {
                 filteredMails.add(storedMail);
             }
         }
@@ -202,8 +201,8 @@ public class Outlook implements MailClient {
     public List<AccountFolder> getInboxFoldersForAcc(String accountName) {
         List<AccountFolder> filteredFolders = new ArrayList<>();
 
-        for(var folder : this.accountsInboxFolders) {
-            if(folder.accountName().equals(accountName)) {
+        for (var folder : this.accountsInboxFolders) {
+            if (folder.accountName().equals(accountName)) {
                 filteredFolders.add(folder);
             }
         }
@@ -213,8 +212,8 @@ public class Outlook implements MailClient {
 
     public AccountFolder getSentFolderForAcc(String accountName) {
 
-        for(var folder : this.accountsSentFolders) {
-            if(folder.accountName().equals(accountName)) {
+        for (var folder : this.accountsSentFolders) {
+            if (folder.accountName().equals(accountName)) {
                 return folder;
             }
         }
@@ -225,8 +224,8 @@ public class Outlook implements MailClient {
     public List<AccountRule> getAccountRulesForAcc(String accountName) {
         List<AccountRule> filteredRules = new ArrayList<>();
 
-        for(var rule : this.rules) {
-            if(rule.getAccountName().equals(accountName)) {
+        for (var rule : this.rules) {
+            if (rule.getAccountName().equals(accountName)) {
                 filteredRules.add(rule);
             }
         }
@@ -260,45 +259,45 @@ public class Outlook implements MailClient {
         validateIsNotNullEmptyOrBlank(accountName, "account name");
         validateIsNotNullEmptyOrBlank(path, "path");
 
-        if(!this.accountExists(accountName)) {
+        if (!this.accountExists(accountName)) {
             throw new AccountNotFoundException("The given account does not exist!");
         }
 
         List<String> paths = List.of(path.split("/"));
 
-        if(paths.size() <= 1 || path.endsWith("/")) {
+        if (paths.size() <= 1 || path.endsWith("/")) {
             throw new InvalidPathException("The path given is invalid!");
         }
 
         paths = paths.subList(1, paths.size());
 
-        for(String curPath : paths) {
-            if(curPath.isEmpty()) {
+        for (String curPath : paths) {
+            if (curPath.isEmpty()) {
                 throw new InvalidPathException("The path given is invalid!");
             }
         }
 
-        if(!path.startsWith(this.INBOX_FOLDER_PATH)) {
+        if (!path.startsWith(this.INBOX_FOLDER_PATH)) {
             throw new InvalidPathException("The path doesn't start from the root(inbox) folder!");
         }
 
-        if(!path.equals(this.INBOX_FOLDER_PATH) && !path.startsWith(this.INBOX_FOLDER_PATH + "/")) {
+        if (!path.equals(this.INBOX_FOLDER_PATH) && !path.startsWith(this.INBOX_FOLDER_PATH + "/")) {
             throw new InvalidPathException("The path doesn't start from the root(inbox) folder!");
         }
 
         List<String> inboxFolders = getInboxFoldersPathsForAccount(accountName);
 
         //Check if some of the subpaths do not exist
-        for(int i = 1; i < paths.size() - 1; i++) {
+        for (int i = 1; i < paths.size() - 1; i++) {
             String curPathToCheck = "/" + String.join("/", paths.subList(0, i + 1));
 
-            if(!inboxFolders.contains(curPathToCheck)) {
+            if (!inboxFolders.contains(curPathToCheck)) {
                 throw new InvalidPathException("The subfolder path '" + curPathToCheck.toString() +
                     "' does not exist!");
             }
         }
 
-        if(inboxFolders.contains(path)) {
+        if (inboxFolders.contains(path)) {
             throw new FolderAlreadyExistsException("The new folder already exists");
         }
 
@@ -313,21 +312,21 @@ public class Outlook implements MailClient {
         validateIsNotNullEmptyOrBlank(folderPath, "folder path");
         validateIsNotNullEmptyOrBlank(ruleDefinition, "rule definition");
 
-        if(priority < 1 || priority > 10){
+        if (priority < AccountRule.MIN_PRIORITY || priority > AccountRule.MAX_PRIORITY) {
             throw new IllegalArgumentException("The priority is not in the range [1-10]");
         }
 
-        if(!this.accountExists(accountName)) {
+        if (!this.accountExists(accountName)) {
             throw new AccountNotFoundException("The given account does not exist!");
         }
 
         List<String> inboxFolders = getInboxFoldersPathsForAccount(accountName);
 
-        if(!inboxFolders.contains(folderPath)){
+        if (!inboxFolders.contains(folderPath)) {
             throw new FolderNotFoundException("The given folder does not exist!");
         }
 
-        if(!AccountRule.ruleDefinitionIsValid(ruleDefinition)) {
+        if (!AccountRule.ruleDefinitionIsValid(ruleDefinition)) {
             throw new RuleAlreadyDefinedException(
                 "The rule definition is incorrect because a rule condition is met more than once"
             );
@@ -335,8 +334,8 @@ public class Outlook implements MailClient {
 
         AccountRule newAccRule = new AccountRule(accountName, folderPath, ruleDefinition, priority);
 
-        for(AccountRule accRule : this.rules) {
-            if(accRule.equals(newAccRule)) {
+        for (AccountRule accRule : this.rules) {
+            if (accRule.equals(newAccRule)) {
                 throw new RuleAlreadyDefinedException("The rule has already been added!");
             }
         }
@@ -347,7 +346,7 @@ public class Outlook implements MailClient {
         var storedMails = this.getStoredMails(accountName, INBOX_FOLDER_PATH);
         var accountRules = this.getAccountRulesForAcc(accountName);
 
-        for(var storedMail : storedMails) {
+        for (var storedMail : storedMails) {
             String newFolderPath = this.getFolderPathForMail(storedMail.mail(), accountRules);
 
             this.storedInboxMails.remove(storedMail);
@@ -362,15 +361,24 @@ public class Outlook implements MailClient {
         validateIsNotNullEmptyOrBlank(mailMetadata, "mail metadata");
         validateIsNotNullEmptyOrBlank(mailContent, "mail content");
 
-        if(!this.accountExists(accountName)) {
+        if (!this.accountExists(accountName)) {
             throw new AccountNotFoundException("The given account does not exist!");
         }
 
+        Mail receivedEmail = null;
+
+        if (this.receiveEmailTemp != null) {
+            receivedEmail = this.receiveEmailTemp;
+        } else {
+            String senderEmail = Mail.getSender(mailMetadata);
+            receivedEmail = this.createMail(senderEmail, mailMetadata, mailContent);
+        }
+
         List<AccountRule> accountRules = this.getAccountRulesForAcc(accountName);
-        String newMailFolderPath = this.getFolderPathForMail(this.receiveEmailTemp, accountRules);
+        String newMailFolderPath = this.getFolderPathForMail(receivedEmail, accountRules);
 
         var accountInboxFolder = this.getInboxFolder(accountName, newMailFolderPath);
-        var newStoredMail = new StoredMail(this.receiveEmailTemp, accountInboxFolder);
+        var newStoredMail = new StoredMail(receivedEmail, accountInboxFolder);
 
         this.storedInboxMails.add(newStoredMail);
     }
@@ -381,14 +389,14 @@ public class Outlook implements MailClient {
         validateIsNotNullEmptyOrBlank(account, "account name");
         validateIsNotNullEmptyOrBlank(folderPath, "folder path");
 
-        if(!this.accountExists(account)) {
+        if (!this.accountExists(account)) {
             throw new AccountNotFoundException("The given account does not exist!");
         }
 
         List<String> inboxFolders = getInboxFoldersPathsForAccount(account);
 
-        if(!inboxFolders.contains(folderPath) &&
-        !folderPath.equals(SENT_FOLDER_PATH)){
+        if (!inboxFolders.contains(folderPath) &&
+            !folderPath.equals(SENT_FOLDER_PATH)) {
             throw new FolderNotFoundException("The given folder does not exist!");
         }
 
@@ -398,7 +406,7 @@ public class Outlook implements MailClient {
         //Get all the normal mails based on the stored mails. Map function pretty much :)
         List<Mail> normalMails = new ArrayList<>();
 
-        for(var storedMail : storedEmails) {
+        for (var storedMail : storedEmails) {
             normalMails.add(storedMail.mail());
         }
 
@@ -423,10 +431,10 @@ public class Outlook implements MailClient {
         this.mails.add(newMail);
 
         //Call receive for each of the recipients
-        for(String recipientEmail : newMail.recipients()) {
+        for (String recipientEmail : newMail.recipients()) {
             Account recipientAcc = getAccountByEmail(recipientEmail);
 
-            if(recipientAcc != null) {
+            if (recipientAcc != null) {
                 receiveMail(recipientAcc.name(), mailMetadata, mailContent);
             }
         }

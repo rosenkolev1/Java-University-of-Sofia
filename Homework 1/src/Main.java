@@ -39,10 +39,10 @@ public class Main {
 
         String ruleDefinition4 = "subject-or-body-includes: Absolutno";
 
-        client.addRule("Roskata123", "/inbox/Important", ruleDefinition1, 3);
-        client.addRule("Roskata123", "/inbox/Spam", ruleDefinition2, 4);
-        client.addRule("vajenRecipient", "/inbox/Spam", ruleDefinition2, 4);
-        client.addRule("Roskata123", "/inbox/Important/SUPER_IMPORTANT", ruleDefinition3, 2);
+//        client.addRule("Roskata123", "/inbox/Important", ruleDefinition1, 3);
+//        client.addRule("Roskata123", "/inbox/Spam", ruleDefinition2, 4);
+//        client.addRule("vajenRecipient", "/inbox/Spam", ruleDefinition2, 4);
+//        client.addRule("Roskata123", "/inbox/Important/SUPER_IMPORTANT", ruleDefinition3, 2);
 
 //        sender: <sender-email>
 //     * subject: <subject>
@@ -82,15 +82,15 @@ public class Main {
 
         String emailMetadata3 =
             "subject: ne6to voda" + newLine +
-            "recipients: vr@abv.bg, rosen123@abv.bg" + newLine +
-            "received: 2022-12-03 12:00";
+                "recipients: vr@abv.bg, rosen123@abv.bg" + newLine +
+                "received: 2022-12-03 12:00";
         String emailContent3 = "Ni6to voda vjno nqma vutre v tozi email";
 
         client.sendMail("Stefan", emailMetadata3, emailContent3);
 
         String emailMetadata4 =
             "sender: KURRRRRR" + newLine +
-            "subject: ne6to voda" + newLine +
+                "subject: ne6to voda" + newLine +
                 "recipients: vr@abv.bg, rosen123@abv.bg" + newLine +
                 "received: 2022-12-03 12:00";
         String emailContent4 = "KURRR";

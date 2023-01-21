@@ -41,16 +41,6 @@ public class NewsFeed implements NewsAPI {
         }
     }
 
-//    private String getErrorMessageFromBody(String body) {
-//        Gson gson = new Gson();
-//
-//        var jsonObject = gson.fromJson(body, JsonObject.class);
-//        var messageElement = jsonObject.get("message");
-//        var message = gson.fromJson(messageElement, String.class);
-//
-//        return message;
-//    }
-
     private void validateResponse(HttpResponse<String> response) throws RequestException {
 
         switch (response.statusCode()) {
@@ -65,13 +55,37 @@ public class NewsFeed implements NewsAPI {
         }
     }
 
+    public Collection<Article> getArticlesFromRequest(NewsRequest request, int pages, int startingPage) throws RequestException {
+        Collection<Article> allArticles = new ArrayList<>();
+
+        for (int i = startingPage; i < startingPage + pages; i++) {
+            NewsRequest pageRequest = NewsRequest.builder(request)
+                .addPage(i)
+                .build();
+
+            Collection<Article> articles = getArticlesFromRequest(pageRequest);
+
+            if (articles.isEmpty()) {
+                break;
+            }
+
+            allArticles.addAll(articles);
+        }
+
+        return allArticles;
+    }
+
+    public Collection<Article> getArticlesFromRequest(NewsRequest request, int pages) throws RequestException {
+        return getArticlesFromRequest(request, pages, 1);
+    }
+
     public Collection<Article> getArticlesFromRequest(NewsRequest request) throws RequestException {
 
         if (!request.containsKeywords()) {
             throw new RequestException("The given request does not contain keyword restrictions!");
         }
 
-        var responseFuture = client.sendAsync(request.getHttpRequest(), HttpResponse.BodyHandlers.ofString())
+        var responseFuture = client.sendAsync(request.httpRequest(), HttpResponse.BodyHandlers.ofString())
             .thenApply(x -> {
                 return x;
             });
@@ -82,7 +96,6 @@ public class NewsFeed implements NewsAPI {
         validateResponse(response);
 
         String responseBody = response.body();
-//        System.out.println("\n\n" + responseBody);
 
         Type listOfArticlesType = new TypeToken<ArrayList<Article>>() {}.getType();
 
@@ -91,21 +104,6 @@ public class NewsFeed implements NewsAPI {
 
         List<Article> articleResponse = gson.fromJson(articlesJsonObject, listOfArticlesType);
 
-//        System.out.println("\n\n" + responseBody);
-//        System.out.println("\n\n" + articleResponse);
-
-        return articleResponse.stream().limit(this.maxArticles).toList();
+        return articleResponse != null ? articleResponse.stream().limit(this.maxArticles).toList() : List.of();
     }
-//
-//    public Collection<Article> getArticlesByKeyword(String... keywords) throws RequestException {
-//        String newURL = this.newsQueryBuilder()
-//            .addKeywordsContains(keywords)
-//            .build();
-//
-//        HttpRequest request = this.buildRequestFromURL(newURL);
-//
-//        return this.getArticlesFromRequest(request);
-//    }
-
-//    public
 }

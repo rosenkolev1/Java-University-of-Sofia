@@ -15,13 +15,15 @@ public class Main {
         var newsApi = NewsFeed.getInstance();
 
         var articlesRequest = NewsRequest.builder()
-            .addKeywordsIncluded("The")
+            .addKeywords("The")
 //            .addCategory(NewsCategory.HEALTH)
             .addCountry(NewsCountry.US)
+            .addPageSize(10)
+            .addPage(1)
             .build();
 
-        var articles = newsApi.getArticlesFromRequest(articlesRequest);
+        var allArticles = newsApi.getArticlesFromRequest(articlesRequest, 3, 1);
 
-        System.out.println(articles);
+        System.out.println(allArticles);
     }
 }

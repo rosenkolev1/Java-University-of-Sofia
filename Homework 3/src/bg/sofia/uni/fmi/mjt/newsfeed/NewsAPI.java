@@ -3,13 +3,10 @@ package bg.sofia.uni.fmi.mjt.newsfeed;
 //The API key: 2fc30dc9238b4c22badf4228ab764b3d
 
 import bg.sofia.uni.fmi.mjt.newsfeed.article.Article;
-import bg.sofia.uni.fmi.mjt.newsfeed.exception.BadRequestException;
 import bg.sofia.uni.fmi.mjt.newsfeed.exception.RequestException;
-import bg.sofia.uni.fmi.mjt.newsfeed.exception.UnexpectedErrorException;
-import jdk.jshell.spi.ExecutionControl;
+import bg.sofia.uni.fmi.mjt.newsfeed.request.NewsRequest;
 
 import java.util.Collection;
-import java.util.List;
 
 public interface NewsAPI {
 

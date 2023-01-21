@@ -1,4 +1,4 @@
-package bg.sofia.uni.fmi.mjt.newsfeed;
+package bg.sofia.uni.fmi.mjt.newsfeed.request;
 
 public enum NewsCategory {
     NULL,

@@ -48,26 +48,6 @@ public class NewsRequest {
         return this.keywords.size() + this.keywords.size() > 0;
     }
 
-//    @Override
-//    public boolean equals(Object other) {
-//        if (other == this) return true;
-//
-//        if (!(other instanceof NewsRequest)) return false;
-//
-//        var castOther = (NewsRequest) other;
-//
-//        for (int i = 0; i < this.keywords.size(); i++) {
-//            if (!this.keywords.get(i).equals(castOther.keywords.get(i)) ) {
-//                return false;
-//            }
-//        }
-//
-//        return this.country == castOther.country &&
-//            this.category == castOther.category &&
-//            this.page == castOther.page &&
-//            this.pageSize == castOther.pageSize;
-//    }
-
     //Request Builder class
     public static class NewsRequestBuilder {
         private List<String> keywords;

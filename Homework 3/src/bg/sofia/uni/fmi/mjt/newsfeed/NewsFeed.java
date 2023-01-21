@@ -54,8 +54,7 @@ public class NewsFeed implements NewsAPI {
     public static NewsFeed getInstance() {
         if (instance != null) {
             return instance;
-        }
-        else {
+        } else {
             return getInstance(BASE_MAX_ARTICLES);
         }
     }
@@ -63,8 +62,7 @@ public class NewsFeed implements NewsAPI {
     public static NewsFeed getInstance(int maxArticles) {
         if (instance != null) {
             return instance;
-        }
-        else {
+        } else {
             instance = new NewsFeed(maxArticles);
             return instance;
         }
@@ -85,20 +83,18 @@ public class NewsFeed implements NewsAPI {
     }
 
     private void removeTrailingQuerySymbols(StringBuilder urlBuilder) {
-        while (true){
+        while (true) {
             if (urlBuilder.toString().endsWith(QUERY_PARAMS_SEPERATOR)) {
                 urlBuilder.delete(
                     urlBuilder.length() - QUERY_PARAMS_SEPERATOR.length(),
                     urlBuilder.length()
                 );
-            }
-            else if (urlBuilder.toString().endsWith(QUERY_PARAMS_START)) {
+            } else if (urlBuilder.toString().endsWith(QUERY_PARAMS_START)) {
                 urlBuilder.delete(
                     urlBuilder.length() - QUERY_PARAMS_START.length(),
                     urlBuilder.length()
                 );
-            }
-            else break;
+            } else break;
         }
     }
 
@@ -184,7 +180,8 @@ public class NewsFeed implements NewsAPI {
         return httpRequest;
     }
 
-    public Collection<Article> getArticlesFromRequest(NewsRequest request, int pages, int startingPage) throws RequestException {
+    public Collection<Article> getArticlesFromRequest(NewsRequest request, int pages, int startingPage)
+        throws RequestException {
 
         if (pages < 0) {
             throw new IllegalArgumentException("The pages should be non-negative");
@@ -236,7 +233,8 @@ public class NewsFeed implements NewsAPI {
 
         String responseBody = response.body();
 
-        Type listOfArticlesType = new TypeToken<ArrayList<Article>>() {}.getType();
+        Type listOfArticlesType = new TypeToken<ArrayList<Article>>() {
+        }.getType();
 
         JsonObject jsonObject = gson.fromJson(responseBody, JsonObject.class);
         var articlesJsonObject = jsonObject.get("articles"); // returns a JsonElement for that name

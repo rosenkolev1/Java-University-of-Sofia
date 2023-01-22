@@ -14,11 +14,11 @@ public class Main {
             .addKeywords("The")
 //            .addCategory(NewsCategory.HEALTH)
             .addCountry(NewsCountry.US)
-            .addPageSize(6)
-            .addPage(3)
+            .addPageSize(1)
+            .addPage(1)
             .build();
 
-        var allArticles = newsApi.getArticlesFromRequest(articlesRequest, 2);
+        var allArticles = newsApi.getArticlesFromRequest(articlesRequest);
 
         System.out.println(allArticles);
     }

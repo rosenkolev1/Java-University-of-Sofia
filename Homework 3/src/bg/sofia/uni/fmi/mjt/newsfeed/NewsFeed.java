@@ -43,7 +43,7 @@ public class NewsFeed implements NewsAPI {
 
     private static NewsFeed instance = null;
 
-    private HttpClient client;
+    private final HttpClient client;
 
     private final String apiKey;
 
@@ -72,9 +72,124 @@ public class NewsFeed implements NewsAPI {
         }
     }
 
+    public HttpRequest createHttpRequest(NewsRequest request) {
+        var urlBuilder = new StringBuilder(this.getBaseUrl());
+
+        urlBuilder.append(QUERY_PARAMS_SEPERATOR);
+
+        //Append the keywords to the query
+        appendKeywordsToQuery(urlBuilder, request.keywords());
+        appendCountryToQuery(urlBuilder, request.country());
+        appendCategoryToQuery(urlBuilder, request.category());
+        appendPageToQuery(urlBuilder, request.page());
+        appendPageSizeToQuery(urlBuilder, request.pageSize());
+
+        //Remove trailing query symbols in query
+        removeTrailingQuerySymbols(urlBuilder);
+
+        HttpRequest httpRequest = this.createHttpRequestFromURL(urlBuilder.toString());
+
+        return httpRequest;
+    }
+
+    @Override
+    public Collection<Article> getAllArticlesFromRequest(NewsRequest request)
+        throws RequestException {
+
+        validateRequest(request);
+
+        Collection<Article> allArticles = new ArrayList<>();
+
+        var intialResponse = createCompletableFutureForRequest(request).join();
+        validateResponse(intialResponse);
+
+        var initialResponseJson = createJsonObjectFromResponse(intialResponse);
+
+        int skippedResults = request.pageSize() * (request.page() - 1);
+
+        int totalPossibleResults = GSON.fromJson(initialResponseJson.get("totalResults"), int.class) - skippedResults;
+
+        var requestsNeeded = (int)Math.ceil((double)totalPossibleResults / request.pageSize());
+
+        return getArticlesFromRequest(request, requestsNeeded);
+    }
+
+    @Override
+    public Collection<Article> getArticlesFromRequest(NewsRequest request, int pagesCount) throws RequestException {
+
+        validateRequest(request);
+
+        if (pagesCount < 0) {
+            throw new IllegalArgumentException("The pagesCount should be non-negative");
+        }
+
+        Collection<Article> allArticles = new ArrayList<>();
+
+        Collection<CompletableFuture<HttpResponse<String>>> responseFutures = new ArrayList<>();
+
+        for (int i = request.page(); i < request.page() + pagesCount; i++) {
+            NewsRequest pageRequest = NewsRequest.builder(request)
+                .addPage(i)
+                .build();
+
+            var responseFuture = createCompletableFutureForRequest(pageRequest);
+
+            responseFutures.add(responseFuture);
+        }
+
+        var allResponses = CompletableFuture.allOf(responseFutures.toArray(new CompletableFuture[responseFutures.size()]))
+            .thenApply(x -> responseFutures.stream().map(y -> y.join()).toList())
+            .join();
+
+        for (var response : allResponses) {
+            validateResponse(response);
+
+            var jsonObject = createJsonObjectFromResponse(response);
+            var articles = getArticlesFromJsonResponse(jsonObject);
+
+            allArticles.addAll(articles);
+
+            if (allArticles.size() >= maxArticles) {
+                return allArticles;
+            }
+        }
+
+        return allArticles;
+    }
+
+    @Override
+    public Collection<Article> getArticlesFromRequest(NewsRequest request) throws RequestException {
+
+        validateRequest(request);
+
+        var response = createCompletableFutureForRequest(request).join();
+
+        validateResponse(response);
+
+        var jsonObject = createJsonObjectFromResponse(response);
+
+        List<Article> articles = getArticlesFromJsonResponse(jsonObject);
+
+        return articles;
+    }
+
     public String getBaseUrl() {
         return REQUEST_PROTOCOL + REQUEST_HOST + REQUEST_ENDPOINT
             + QUERY_PARAMS_START + QUERY_APIKEY + apiKey;
+    }
+
+    private void validateRequest(NewsRequest request) {
+        if (request == null || !request.containsKeywords()) {
+            throw new IllegalArgumentException("The given request was null or it does not contain any keywords!");
+        }
+
+        if (request.pageSize() <= 0) {
+            throw new IllegalArgumentException("The pageSize of the request should be positive!");
+        }
+
+        if (request.page() <= 0) {
+            throw new IllegalArgumentException("The page of the request should be positive!");
+        }
     }
 
     private void validateResponse(HttpResponse<String> response) throws RequestException {
@@ -174,11 +289,15 @@ public class NewsFeed implements NewsAPI {
 
         var responseFuture = client.sendAsync(httpRequest, HttpResponse.BodyHandlers.ofString())
             .thenApply(x -> {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+                // Uncomment this if you want to simulate long response times.
+                // The requests for multiple pages should not be executed sequentially, but instead in parallel.
+//                try {
+//                    Thread.sleep(5000);
+//                    System.out.println("The wait is over! I have received a response!");
+//                } catch (InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
+
                 return x;
             });
 
@@ -201,118 +320,5 @@ public class NewsFeed implements NewsAPI {
         List<Article> articleResponse = GSON.fromJson(articlesJsonObject, listOfArticlesType);
 
         return articleResponse != null ? articleResponse.stream().limit(this.maxArticles).toList() : List.of();
-    }
-
-    private void validateRequest(NewsRequest request) {
-        if (request == null || !request.containsKeywords()) {
-            throw new IllegalArgumentException("The given request was null or it does not contain any keywords!");
-        }
-
-        if (request.pageSize() <= 0) {
-            throw new IllegalArgumentException("The pageSize of the request should be positive!");
-        }
-
-        if (request.page() <= 0) {
-            throw new IllegalArgumentException("The page of the request should be positive!");
-        }
-    }
-
-    public HttpRequest createHttpRequest(NewsRequest request) {
-        var urlBuilder = new StringBuilder(this.getBaseUrl());
-
-        urlBuilder.append(QUERY_PARAMS_SEPERATOR);
-
-        //Append the keywords to the query
-        appendKeywordsToQuery(urlBuilder, request.keywords());
-        appendCountryToQuery(urlBuilder, request.country());
-        appendCategoryToQuery(urlBuilder, request.category());
-        appendPageToQuery(urlBuilder, request.page());
-        appendPageSizeToQuery(urlBuilder, request.pageSize());
-
-        //Remove trailing query symbols in query
-        removeTrailingQuerySymbols(urlBuilder);
-
-        HttpRequest httpRequest = this.createHttpRequestFromURL(urlBuilder.toString());
-
-        return httpRequest;
-    }
-
-    @Override
-    public Collection<Article> getAllArticlesFromRequest(NewsRequest request)
-        throws RequestException {
-
-        validateRequest(request);
-
-        Collection<Article> allArticles = new ArrayList<>();
-
-        var intialResponse = createCompletableFutureForRequest(request).join();
-        validateResponse(intialResponse);
-
-        var initialResponseJson = createJsonObjectFromResponse(intialResponse);
-
-        int skippedResults = request.pageSize() * (request.page() - 1);
-
-        int totalPossibleResults = GSON.fromJson(initialResponseJson.get("totalResults"), int.class) - skippedResults;
-
-        var requestsNeeded = (int)Math.ceil((double)totalPossibleResults / request.pageSize());
-
-        return getArticlesFromRequest(request, requestsNeeded);
-    }
-
-    public Collection<Article> getArticlesFromRequest(NewsRequest request, int pagesCount) throws RequestException {
-
-        validateRequest(request);
-
-        if (pagesCount < 0) {
-            throw new IllegalArgumentException("The pagesCount should be non-negative");
-        }
-
-        Collection<Article> allArticles = new ArrayList<>();
-
-        Collection<CompletableFuture<HttpResponse<String>>> responseFutures = new ArrayList<>();
-
-        for (int i = request.page(); i < request.page() + pagesCount; i++) {
-            NewsRequest pageRequest = NewsRequest.builder(request)
-                .addPage(i)
-                .build();
-
-            var responseFuture = createCompletableFutureForRequest(pageRequest);
-
-            responseFutures.add(responseFuture);
-        }
-
-        var allResponses = CompletableFuture.allOf(responseFutures.toArray(new CompletableFuture[responseFutures.size()]))
-            .thenApply(x -> responseFutures.stream().map(y -> y.join()).toList())
-            .join();
-
-        for (var response : allResponses) {
-            validateResponse(response);
-
-            var jsonObject = createJsonObjectFromResponse(response);
-            var articles = getArticlesFromJsonResponse(jsonObject);
-
-            allArticles.addAll(articles);
-
-            if (allArticles.size() >= maxArticles) {
-                return allArticles;
-            }
-        }
-
-        return allArticles;
-    }
-
-    public Collection<Article> getArticlesFromRequest(NewsRequest request) throws RequestException {
-
-        validateRequest(request);
-
-        var response = createCompletableFutureForRequest(request).join();
-
-        validateResponse(response);
-
-        var jsonObject = createJsonObjectFromResponse(response);
-
-        List<Article> articles = getArticlesFromJsonResponse(jsonObject);
-
-        return articles;
     }
 }

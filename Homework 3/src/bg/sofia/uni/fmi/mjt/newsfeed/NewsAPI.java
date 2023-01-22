@@ -11,10 +11,26 @@ import java.util.Collection;
 public interface NewsAPI {
 
     /**
-     * @param keywords by which to filter the articles
+     * Returns all the articles which match the given request criteria.
+     * Returns only the articles from the requests' page property.
+     * @param request by which to filter the articles.
      * @return the articles which contain all the keywords
      */
     Collection<Article> getArticlesFromRequest(NewsRequest request) throws RequestException;
+
+    /**
+     * Returns all the articles which match the given request criteria, starting from @request.page() and taking the next @pagesCount pages.
+     * If @pagesCount is more than the possible pages to get, then this method returns all possible pages instead.
+     * @param request by which to filter the articles.
+     *        pagesCount by which to determine how many pages of articles to return.
+     * @return the articles which contain all the keywords
+     */
     Collection<Article> getArticlesFromRequest(NewsRequest request, int pagesCount) throws RequestException;
+
+    /**
+     * Returns all the articles which match the given request criteria, starting from @request.page() and taking all pages after it.
+     * @param request by which to filter the articles.
+     * @return the articles which contain all the keywords
+     */
     Collection<Article> getAllArticlesFromRequest(NewsRequest request) throws RequestException;
 }

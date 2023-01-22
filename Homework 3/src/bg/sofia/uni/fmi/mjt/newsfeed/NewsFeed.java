@@ -180,8 +180,34 @@ public class NewsFeed implements NewsAPI {
         return httpRequest;
     }
 
-    public Collection<Article> getArticlesFromRequest(NewsRequest request, int pages, int startingPage)
+    @Override
+    public Collection<Article> getAllArticlesFromRequest(NewsRequest request)
         throws RequestException {
+
+        Collection<Article> allArticles = new ArrayList<>();
+
+        int curPage = 1;
+
+        do {
+            NewsRequest pageRequest = NewsRequest.builder(request)
+                .addPage(curPage)
+                .build();
+
+            Collection<Article> articles = getArticlesFromRequest(pageRequest);
+
+            if (articles.isEmpty()) {
+                break;
+            }
+
+            allArticles.addAll(articles);
+
+            curPage++;
+        } while(true);
+
+        return allArticles;
+    }
+
+    public Collection<Article> getArticlesFromRequest(NewsRequest request, int pages, int startingPage) throws RequestException {
 
         if (pages < 0) {
             throw new IllegalArgumentException("The pages should be non-negative");
@@ -233,8 +259,7 @@ public class NewsFeed implements NewsAPI {
 
         String responseBody = response.body();
 
-        Type listOfArticlesType = new TypeToken<ArrayList<Article>>() {
-        }.getType();
+        Type listOfArticlesType = new TypeToken<ArrayList<Article>>() {}.getType();
 
         JsonObject jsonObject = gson.fromJson(responseBody, JsonObject.class);
         var articlesJsonObject = jsonObject.get("articles"); // returns a JsonElement for that name

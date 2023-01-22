@@ -17,4 +17,5 @@ public interface NewsAPI {
     Collection<Article> getArticlesFromRequest(NewsRequest request) throws RequestException;
     Collection<Article> getArticlesFromRequest(NewsRequest request, int pages) throws RequestException;
     Collection<Article> getArticlesFromRequest(NewsRequest request, int pages, int startingPage) throws RequestException;
+    Collection<Article> getAllArticlesFromRequest(NewsRequest request) throws RequestException;
 }

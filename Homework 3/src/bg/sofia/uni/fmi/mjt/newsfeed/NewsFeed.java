@@ -18,6 +18,10 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
 public class NewsFeed implements NewsAPI {
     public static final String REQUEST_PROTOCOL = "https://";
@@ -33,39 +37,44 @@ public class NewsFeed implements NewsAPI {
     public static final String QUERY_COUNTRY = "country=";
     public static final String QUERY_CATEGORY = "category=";
 
-    public static final String API_KEY = "2fc30dc9238b4c22badf4228ab764b3d";
-
-    public static final String BASE_URL = REQUEST_PROTOCOL + REQUEST_HOST + REQUEST_ENDPOINT
-        + QUERY_PARAMS_START + QUERY_APIKEY + API_KEY;
-
     public static final int BASE_MAX_ARTICLES = 120;
+
+    private static final Gson GSON = new Gson();
 
     private static NewsFeed instance = null;
 
     private HttpClient client;
 
+    private final String apiKey;
+
     public final int maxArticles;
 
-    private NewsFeed(int maxArticles) {
+    private NewsFeed(String apiKey, int maxArticles) {
+        this.apiKey = apiKey;
         this.maxArticles = maxArticles;
         this.client = HttpClient.newBuilder().build();
     }
 
-    public static NewsFeed getInstance() {
+    public static NewsFeed getInstance(String apiKey) {
         if (instance != null) {
             return instance;
         } else {
-            return getInstance(BASE_MAX_ARTICLES);
+            return getInstance(apiKey, BASE_MAX_ARTICLES);
         }
     }
 
-    public static NewsFeed getInstance(int maxArticles) {
+    public static NewsFeed getInstance(String apiKey, int maxArticles) {
         if (instance != null) {
             return instance;
         } else {
-            instance = new NewsFeed(maxArticles);
+            instance = new NewsFeed(apiKey, maxArticles);
             return instance;
         }
+    }
+
+    public String getBaseUrl() {
+        return REQUEST_PROTOCOL + REQUEST_HOST + REQUEST_ENDPOINT
+            + QUERY_PARAMS_START + QUERY_APIKEY + apiKey;
     }
 
     private void validateResponse(HttpResponse<String> response) throws RequestException {
@@ -160,8 +169,56 @@ public class NewsFeed implements NewsAPI {
         }
     }
 
+    private CompletableFuture<HttpResponse<String>> createCompletableFutureForRequest(NewsRequest request) {
+        var httpRequest = createHttpRequest(request);
+
+        var responseFuture = client.sendAsync(httpRequest, HttpResponse.BodyHandlers.ofString())
+            .thenApply(x -> {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                return x;
+            });
+
+        return responseFuture;
+    }
+
+    private JsonObject createJsonObjectFromResponse(HttpResponse<String> response) throws RequestException {
+        String responseBody = response.body();
+
+        JsonObject jsonObject = GSON.fromJson(responseBody, JsonObject.class);
+
+        return jsonObject;
+    }
+
+    private List<Article> getArticlesFromJsonResponse(JsonObject jsonObject) {
+
+        var articlesJsonObject = jsonObject.get("articles"); // returns a JsonElement for that name
+
+        Type listOfArticlesType = new TypeToken<ArrayList<Article>>() {}.getType();
+        List<Article> articleResponse = GSON.fromJson(articlesJsonObject, listOfArticlesType);
+
+        return articleResponse != null ? articleResponse.stream().limit(this.maxArticles).toList() : List.of();
+    }
+
+    private void validateRequest(NewsRequest request) {
+        if (request == null || !request.containsKeywords()) {
+            throw new IllegalArgumentException("The given request was null or it does not contain any keywords!");
+        }
+
+        if (request.pageSize() <= 0) {
+            throw new IllegalArgumentException("The pageSize of the request should be positive!");
+        }
+
+        if (request.page() <= 0) {
+            throw new IllegalArgumentException("The page of the request should be positive!");
+        }
+    }
+
     public HttpRequest createHttpRequest(NewsRequest request) {
-        var urlBuilder = new StringBuilder(BASE_URL);
+        var urlBuilder = new StringBuilder(this.getBaseUrl());
 
         urlBuilder.append(QUERY_PARAMS_SEPERATOR);
 
@@ -184,88 +241,78 @@ public class NewsFeed implements NewsAPI {
     public Collection<Article> getAllArticlesFromRequest(NewsRequest request)
         throws RequestException {
 
+        validateRequest(request);
+
         Collection<Article> allArticles = new ArrayList<>();
 
-        int curPage = 1;
+        var intialResponse = createCompletableFutureForRequest(request).join();
+        validateResponse(intialResponse);
 
-        do {
-            NewsRequest pageRequest = NewsRequest.builder(request)
-                .addPage(curPage)
-                .build();
+        var initialResponseJson = createJsonObjectFromResponse(intialResponse);
 
-            Collection<Article> articles = getArticlesFromRequest(pageRequest);
+        int skippedResults = request.pageSize() * (request.page() - 1);
 
-            if (articles.isEmpty()) {
-                break;
-            }
+        int totalPossibleResults = GSON.fromJson(initialResponseJson.get("totalResults"), int.class) - skippedResults;
 
-            allArticles.addAll(articles);
+        var requestsNeeded = (int)Math.ceil((double)totalPossibleResults / request.pageSize());
 
-            curPage++;
-        } while(true);
-
-        return allArticles;
+        return getArticlesFromRequest(request, requestsNeeded);
     }
 
-    public Collection<Article> getArticlesFromRequest(NewsRequest request, int pages, int startingPage) throws RequestException {
+    public Collection<Article> getArticlesFromRequest(NewsRequest request, int pagesCount) throws RequestException {
 
-        if (pages < 0) {
-            throw new IllegalArgumentException("The pages should be non-negative");
-        }
+        validateRequest(request);
 
-        if (startingPage <= 0) {
-            throw new IllegalArgumentException("The starting page should be positive");
+        if (pagesCount < 0) {
+            throw new IllegalArgumentException("The pagesCount should be non-negative");
         }
 
         Collection<Article> allArticles = new ArrayList<>();
 
-        for (int i = startingPage; i < startingPage + pages; i++) {
+        Collection<CompletableFuture<HttpResponse<String>>> responseFutures = new ArrayList<>();
+
+        for (int i = request.page(); i < request.page() + pagesCount; i++) {
             NewsRequest pageRequest = NewsRequest.builder(request)
                 .addPage(i)
                 .build();
 
-            Collection<Article> articles = getArticlesFromRequest(pageRequest);
+            var responseFuture = createCompletableFutureForRequest(pageRequest);
 
-            if (articles.isEmpty()) {
-                break;
-            }
+            responseFutures.add(responseFuture);
+        }
+
+        var allResponses = CompletableFuture.allOf(responseFutures.toArray(new CompletableFuture[responseFutures.size()]))
+            .thenApply(x -> responseFutures.stream().map(y -> y.join()).toList())
+            .join();
+
+        for (var response : allResponses) {
+            validateResponse(response);
+
+            var jsonObject = createJsonObjectFromResponse(response);
+            var articles = getArticlesFromJsonResponse(jsonObject);
 
             allArticles.addAll(articles);
+
+            if (allArticles.size() >= maxArticles) {
+                return allArticles;
+            }
         }
 
         return allArticles;
     }
 
-    public Collection<Article> getArticlesFromRequest(NewsRequest request, int pages) throws RequestException {
-        return getArticlesFromRequest(request, pages, 1);
-    }
-
     public Collection<Article> getArticlesFromRequest(NewsRequest request) throws RequestException {
-        if (request == null || !request.containsKeywords()) {
-            throw new IllegalArgumentException("The given request was null or it does not contain any keywords!");
-        }
 
-        var httpRequest = createHttpRequest(request);
+        validateRequest(request);
 
-        var responseFuture = client.sendAsync(httpRequest, HttpResponse.BodyHandlers.ofString())
-            .thenApply(x -> {
-                return x;
-            });
-
-        Gson gson = new Gson();
-        var response = responseFuture.join();
+        var response = createCompletableFutureForRequest(request).join();
 
         validateResponse(response);
 
-        String responseBody = response.body();
+        var jsonObject = createJsonObjectFromResponse(response);
 
-        Type listOfArticlesType = new TypeToken<ArrayList<Article>>() {}.getType();
+        List<Article> articles = getArticlesFromJsonResponse(jsonObject);
 
-        JsonObject jsonObject = gson.fromJson(responseBody, JsonObject.class);
-        var articlesJsonObject = jsonObject.get("articles"); // returns a JsonElement for that name
-
-        List<Article> articleResponse = gson.fromJson(articlesJsonObject, listOfArticlesType);
-
-        return articleResponse != null ? articleResponse.stream().limit(this.maxArticles).toList() : List.of();
+        return articles;
     }
 }

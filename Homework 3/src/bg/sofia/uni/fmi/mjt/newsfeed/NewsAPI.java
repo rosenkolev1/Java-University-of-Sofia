@@ -15,7 +15,6 @@ public interface NewsAPI {
      * @return the articles which contain all the keywords
      */
     Collection<Article> getArticlesFromRequest(NewsRequest request) throws RequestException;
-    Collection<Article> getArticlesFromRequest(NewsRequest request, int pages) throws RequestException;
-    Collection<Article> getArticlesFromRequest(NewsRequest request, int pages, int startingPage) throws RequestException;
+    Collection<Article> getArticlesFromRequest(NewsRequest request, int pagesCount) throws RequestException;
     Collection<Article> getAllArticlesFromRequest(NewsRequest request) throws RequestException;
 }
